@@ -14,8 +14,6 @@ export class AppComponent {
   }
 
   public onSearch(searchParam) {
-    console.log('search');
-
     this.http.get(`https://guarded-refuge-12450.herokuapp.com/appointments/search/${this.searchParam}`)
       .subscribe(data => {
         console.log(data);
