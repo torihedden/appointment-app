@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'Appointment App';
   searchParam = '';
+  appointments = [];
 
   constructor(private http: HttpClient) {
   }
@@ -16,8 +17,16 @@ export class AppComponent {
   public onSearch(searchParam) {
     this.http.get(`https://guarded-refuge-12450.herokuapp.com/appointments/search/${this.searchParam}`)
       .subscribe(data => {
-        console.log(data);
+        this.appointments = data;
+        console.log(this.appointments);
       })
   }
 
 }
+
+// export class Appointment {
+//   id: string;
+//   date: string;
+//   time: string;
+//   description: string;
+// }

@@ -5,12 +5,30 @@
     <input [(ngModel)]="searchParam" type="text" name="" value="" placeholder="search">
     <button type="button" name="button" (click)="onSearch()">Search</button>
   </div>
-
   <br>
 
-  <h3>New</h3>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Description</th>
+    </tr>
+    <tr *ngFor="let appointment of appointments">
+      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>
+      <th>{{appointment.dateTime | date: 'shortTime'}}</th>
+      <th>{{appointment.description}}</th>
+    </tr>
+  </table>
+
+  <h3>New Appointment</h3>
   <form class="" action="index.html" method="post">
     <label for="">Date</label>
     <input type="date" name="" value="">
+    <br>
+    <label for="">Time</label>
+    <input type="time" name="" value="">
+    <br>
+    <label for="">Description</label>
+    <input type="text" name="" value="">
   </form>
 </div>
