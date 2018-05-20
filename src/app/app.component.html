@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div>
   <h1>{{ title }}</h1>
 
   <div class="">
@@ -10,7 +10,7 @@
   </div>
   <br>
 
-  <table>
+  <table *ngIf="submittedSearch">
     <tr>
       <th>Date</th>
       <th>Time</th>

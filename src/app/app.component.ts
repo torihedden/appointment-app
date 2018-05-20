@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'Appointment App';
   searchParam = '';
   appointments:any = [];
+  submittedSearch = false;
 
   formData = {
     date : '',
@@ -22,24 +23,23 @@ export class AppComponent {
   }
 
   public onSearch(searchParam) {
+    this.submittedSearch = true;
     this.http.get(`https://guarded-refuge-12450.herokuapp.com/appointments/search/${this.searchParam}`)
       .subscribe(data => {
         this.appointments = data;
-        console.log(this.appointments);
       })
   }
 
   public createAppointment(formData) {
-    // TODO: format data before constructing the POST request
     let dateTime = (new Date(`${formData.date} ${formData.time}`)).toISOString();
-    console.log({dateTime: dateTime, description: `${formData.description}`});
+    let body = {dateTime: dateTime, description: `${formData.description}`};
+
+    this.http.post(`https://guarded-refuge-12450.herokuapp.com/appointments/create`, body)
+      .subscribe(data => {
+        formData.date = '';
+        formData.time = '';
+        formData.description ='';
+      })
   }
 
 }
-
-// export class Appointment {
-//   id: string;
-//   date: string;
-//   time: string;
-//   description: string;
-// }
