@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button type=\"button\" name=\"button\" (click)=\"onSearch()\">Search</button>\r\n  </div>\r\n\r\n  <br>\r\n\r\n  <h3>New</h3>\r\n  <form class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"\" value=\"\">\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div style=\"text-align:center\">\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button type=\"button\" name=\"button\" (click)=\"onSearch()\">Search</button>\r\n  </div>\r\n  <br>\r\n\r\n  <table>\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n    </tr>\r\n  </table>\r\n\r\n  <h3>New Appointment</h3>\r\n  <form class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"\" value=\"\">\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"\" value=\"\">\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"\" value=\"\">\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -73,11 +73,14 @@ var AppComponent = /** @class */ (function () {
         this.http = http;
         this.title = 'Appointment App';
         this.searchParam = '';
+        this.appointments = [];
     }
     AppComponent.prototype.onSearch = function (searchParam) {
+        var _this = this;
         this.http.get("https://guarded-refuge-12450.herokuapp.com/appointments/search/" + this.searchParam)
             .subscribe(function (data) {
-            console.log(data);
+            _this.appointments = data;
+            console.log(_this.appointments);
         });
     };
     AppComponent = __decorate([
@@ -91,6 +94,12 @@ var AppComponent = /** @class */ (function () {
     return AppComponent;
 }());
 
+// export class Appointment {
+//   id: string;
+//   date: string;
+//   time: string;
+//   description: string;
+// }
 
 
 /***/ }),
