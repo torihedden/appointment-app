@@ -11,6 +11,7 @@ export class AppComponent {
   searchParam = '';
   appointments:any = [];
 
+
   constructor(private http: HttpClient) {
   }
 
