@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button (click)=\"onSearch()\"\r\n            type=\"button\"\r\n            name=\"button\">Search\r\n    </button>\r\n  </div>\r\n  <br>\r\n\r\n  <table *ngIf=\"submittedSearch\">\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n    </tr>\r\n  </table>\r\n\r\n  <h3>New Appointment</h3>\r\n  <form class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"date\" value=\"\" [(ngModel)]=\"formData.date\" required>\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"time\" value=\"\" [(ngModel)]=\"formData.time\" required>\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"description\" value=\"\" [(ngModel)]=\"formData.description\" required>\r\n    <br>\r\n    <!-- <input type=\"submit\" name=\"\" value=\"Create appointment\"> -->\r\n    <button (click)=\"createAppointment(formData)\" type=\"button\" name=\"button\">Create</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div>\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button (click)=\"onSearch()\"\r\n            type=\"button\"\r\n            name=\"button\">Search\r\n    </button>\r\n  </div>\r\n  <br>\r\n\r\n  <table *ngIf=\"submittedSearch\">\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n    </tr>\r\n  </table>\r\n\r\n  <button (click)=\"toggleForm(true)\" type=\"button\" name=\"button\">New appointment</button>\r\n  <form *ngIf=\"createFormOpen\" class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"date\" value=\"\" [(ngModel)]=\"formData.date\" required>\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"time\" value=\"\" [(ngModel)]=\"formData.time\" required>\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"description\" value=\"\" [(ngModel)]=\"formData.description\" required>\r\n    <br>\r\n    <button (click)=\"createAppointment(formData)\" type=\"button\" name=\"button\">Create</button>\r\n    <button (click)=\"cancelCreate(formData)\" type=\"button\" name=\"button\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -75,6 +75,7 @@ var AppComponent = /** @class */ (function () {
         this.searchParam = '';
         this.appointments = [];
         this.submittedSearch = false;
+        this.createFormOpen = false;
         this.formData = {
             date: '',
             time: '',
@@ -90,14 +91,25 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent.prototype.createAppointment = function (formData) {
+        var _this = this;
         var dateTime = (new Date(formData.date + " " + formData.time)).toISOString();
         var body = { dateTime: dateTime, description: "" + formData.description };
         this.http.post("https://guarded-refuge-12450.herokuapp.com/appointments/create", body)
             .subscribe(function (data) {
-            formData.date = '';
-            formData.time = '';
-            formData.description = '';
+            _this.clearFormData(formData);
         });
+    };
+    AppComponent.prototype.toggleForm = function (bool) {
+        this.createFormOpen = bool;
+    };
+    AppComponent.prototype.clearFormData = function (formData) {
+        formData.date = '';
+        formData.time = '';
+        formData.description = '';
+    };
+    AppComponent.prototype.cancelCreate = function (formData) {
+        this.clearFormData(formData);
+        this.toggleForm(false);
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
