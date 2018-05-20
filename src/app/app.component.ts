@@ -7,10 +7,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Appointment App';
-  searchParam = '';
+  title            = 'Appointment App';
+  searchParam      = '';
   appointments:any = [];
-  submittedSearch = false;
+  submittedSearch  = false;
+  createFormOpen   = false;
 
   formData = {
     date : '',
@@ -36,10 +37,23 @@ export class AppComponent {
 
     this.http.post(`https://guarded-refuge-12450.herokuapp.com/appointments/create`, body)
       .subscribe(data => {
-        formData.date = '';
-        formData.time = '';
-        formData.description ='';
+        this.clearFormData(formData);
       })
+  }
+
+  publice toggleForm (bool) {
+    this.createFormOpen = bool;
+  }
+
+  public clearFormData(formData) {
+    formData.date = '';
+    formData.time = '';
+    formData.description ='';
+  }
+
+  public cancelCreate(formData) {
+    this.clearFormData(formData);
+    this.toggleForm(false);
   }
 
 }

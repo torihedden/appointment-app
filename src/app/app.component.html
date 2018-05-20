@@ -23,8 +23,8 @@
     </tr>
   </table>
 
-  <h3>New Appointment</h3>
-  <form class="" action="index.html" method="post">
+  <button (click)="toggleForm(true)" type="button" name="button">New appointment</button>
+  <form *ngIf="createFormOpen" class="" action="index.html" method="post">
     <label for="">Date</label>
     <input type="date" name="date" value="" [(ngModel)]="formData.date" required>
     <br>
@@ -34,7 +34,7 @@
     <label for="">Description</label>
     <input type="text" name="description" value="" [(ngModel)]="formData.description" required>
     <br>
-    <!-- <input type="submit" name="" value="Create appointment"> -->
     <button (click)="createAppointment(formData)" type="button" name="button">Create</button>
+    <button (click)="cancelCreate(formData)" type="button" name="button">Cancel</button>
   </form>
 </div>
