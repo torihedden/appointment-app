@@ -3,7 +3,10 @@
 
   <div class="">
     <input [(ngModel)]="searchParam" type="text" name="" value="" placeholder="search">
-    <button type="button" name="button" (click)="onSearch()">Search</button>
+    <button (click)="onSearch()"
+            type="button"
+            name="button">Search
+    </button>
   </div>
   <br>
 
@@ -23,12 +26,15 @@
   <h3>New Appointment</h3>
   <form class="" action="index.html" method="post">
     <label for="">Date</label>
-    <input type="date" name="" value="">
+    <input type="date" name="date" value="" [(ngModel)]="formData.date" required>
     <br>
     <label for="">Time</label>
-    <input type="time" name="" value="">
+    <input type="time" name="time" value="" [(ngModel)]="formData.time" required>
     <br>
     <label for="">Description</label>
-    <input type="text" name="" value="">
+    <input type="text" name="description" value="" [(ngModel)]="formData.description" required>
+    <br>
+    <!-- <input type="submit" name="" value="Create appointment"> -->
+    <button (click)="createAppointment(formData)" type="button" name="button">Create</button>
   </form>
 </div>

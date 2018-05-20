@@ -11,6 +11,12 @@ export class AppComponent {
   searchParam = '';
   appointments:any = [];
 
+  formData = {
+    date : '',
+    time : '',
+    description : ''
+  }
+
 
   constructor(private http: HttpClient) {
   }
@@ -21,6 +27,12 @@ export class AppComponent {
         this.appointments = data;
         console.log(this.appointments);
       })
+  }
+
+  public createAppointment(formData) {
+    // TODO: format data before constructing the POST request
+    let dateTime = (new Date(`${formData.date} ${formData.time}`)).toISOString();
+    console.log({dateTime: dateTime, description: `${formData.description}`});
   }
 
 }
