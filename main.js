@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button type=\"button\" name=\"button\" (click)=\"onSearch()\">Search</button>\r\n  </div>\r\n  <br>\r\n\r\n  <table>\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n    </tr>\r\n  </table>\r\n\r\n  <h3>New Appointment</h3>\r\n  <form class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"\" value=\"\">\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"\" value=\"\">\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"\" value=\"\">\r\n    <br>\r\n    <input type=\"submit\" name=\"\" value=\"Create appointment\">\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div>\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button (click)=\"onSearch()\"\r\n            type=\"button\"\r\n            name=\"button\">Search\r\n    </button>\r\n  </div>\r\n  <br>\r\n\r\n  <table *ngIf=\"submittedSearch\">\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n    </tr>\r\n  </table>\r\n\r\n  <h3>New Appointment</h3>\r\n  <form class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"date\" value=\"\" [(ngModel)]=\"formData.date\" required>\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"time\" value=\"\" [(ngModel)]=\"formData.time\" required>\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"description\" value=\"\" [(ngModel)]=\"formData.description\" required>\r\n    <br>\r\n    <!-- <input type=\"submit\" name=\"\" value=\"Create appointment\"> -->\r\n    <button (click)=\"createAppointment(formData)\" type=\"button\" name=\"button\">Create</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -74,13 +74,29 @@ var AppComponent = /** @class */ (function () {
         this.title = 'Appointment App';
         this.searchParam = '';
         this.appointments = [];
+        this.submittedSearch = false;
+        this.formData = {
+            date: '',
+            time: '',
+            description: ''
+        };
     }
     AppComponent.prototype.onSearch = function (searchParam) {
         var _this = this;
+        this.submittedSearch = true;
         this.http.get("https://guarded-refuge-12450.herokuapp.com/appointments/search/" + this.searchParam)
             .subscribe(function (data) {
             _this.appointments = data;
-            console.log(_this.appointments);
+        });
+    };
+    AppComponent.prototype.createAppointment = function (formData) {
+        var dateTime = (new Date(formData.date + " " + formData.time)).toISOString();
+        var body = { dateTime: dateTime, description: "" + formData.description };
+        this.http.post("https://guarded-refuge-12450.herokuapp.com/appointments/create", body)
+            .subscribe(function (data) {
+            formData.date = '';
+            formData.time = '';
+            formData.description = '';
         });
     };
     AppComponent = __decorate([
@@ -94,12 +110,6 @@ var AppComponent = /** @class */ (function () {
     return AppComponent;
 }());
 
-// export class Appointment {
-//   id: string;
-//   date: string;
-//   time: string;
-//   description: string;
-// }
 
 
 /***/ }),
