@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'Appointment App';
   searchParam = '';
-  appointments = [];
+  appointments:any = [];
 
   constructor(private http: HttpClient) {
   }
