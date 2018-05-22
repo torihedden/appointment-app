@@ -12,6 +12,7 @@ export class AppComponent {
   appointments:any = [];
   submittedSearch  = false;
   createFormOpen   = false;
+  errorMessage     = null;
 
   formData = {
     date : '',
@@ -25,9 +26,16 @@ export class AppComponent {
 
   public onSearch(searchParam) {
     this.submittedSearch = true;
+    this.errorMessage = null;
     this.http.get(`https://guarded-refuge-12450.herokuapp.com/appointments/search/${this.searchParam}`)
       .subscribe(data => {
-        this.appointments = data;
+        if (data[0]) {
+          this.appointments = data;
+          this.errorMessage = null;
+        } else {
+          this.errorMessage = "No search results found.";
+          this.appointments = [];
+        }
       })
   }
 
@@ -41,7 +49,7 @@ export class AppComponent {
       })
   }
 
-  publice toggleForm (bool) {
+  public toggleForm (bool) {
     this.createFormOpen = bool;
   }
 

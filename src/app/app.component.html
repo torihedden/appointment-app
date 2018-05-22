@@ -10,7 +10,10 @@
   </div>
   <br>
 
-  <table *ngIf="submittedSearch">
+  <div *ngIf="submittedSearch && !appointments.length && !errorMessage"><h3>Loading...</h3></div>
+  <div *ngIf="errorMessage"><h3>{{errorMessage}}</h3></div>
+
+  <table *ngIf="submittedSearch && appointments.length">
     <tr>
       <th>Date</th>
       <th>Time</th>
