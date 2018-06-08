@@ -1,0 +1,9 @@
+.action-icon {
+  fill: lightgray;
+  width: 15px;
+  margin-right: 15px;
+}
+
+.action-icon:hover {
+  fill: black;
+}

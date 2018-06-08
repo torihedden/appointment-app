@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".action-icon {\r\n  fill: lightgray;\r\n  width: 15px;\r\n  margin-right: 15px;\r\n}\r\n\r\n.action-icon:hover {\r\n  fill: black;\r\n}\r\n"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button (click)=\"onSearch()\"\r\n            type=\"button\"\r\n            name=\"button\">Search\r\n    </button>\r\n  </div>\r\n  <br>\r\n\r\n  <div *ngIf=\"submittedSearch && !appointments.length && !errorMessage\"><h3>Loading...</h3></div>\r\n  <div *ngIf=\"errorMessage\"><h3>{{errorMessage}}</h3></div>\r\n\r\n  <table *ngIf=\"submittedSearch && appointments.length\">\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n    </tr>\r\n  </table>\r\n\r\n  <button (click)=\"toggleForm(true)\" type=\"button\" name=\"button\">New appointment</button>\r\n  <form *ngIf=\"createFormOpen\" class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"date\" value=\"\" [(ngModel)]=\"formData.date\" required>\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"time\" value=\"\" [(ngModel)]=\"formData.time\" required>\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"description\" value=\"\" [(ngModel)]=\"formData.description\" required>\r\n    <br>\r\n    <button (click)=\"createAppointment(formData)\" type=\"button\" name=\"button\">Create</button>\r\n    <button (click)=\"cancelCreate(formData)\" type=\"button\" name=\"button\">Cancel</button>\r\n  </form>\r\n</div>\r\n\r\n<div style=\"position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;\">\r\n  <p>View this project's source code <a href=\"https://github.com/torihedden/apptBack\" target=\"_blank\">here</a> and <a href=\"https://github.com/torihedden/appointment-app\" target=\"_blank\">here</a>.</p>\r\n</div>\r\n"
+module.exports = "<div>\r\n  <h1>{{ title }}</h1>\r\n\r\n  <div class=\"\">\r\n    <input [(ngModel)]=\"searchParam\" type=\"text\" name=\"\" value=\"\" placeholder=\"search\">\r\n    <button (click)=\"onSearch()\"\r\n            type=\"button\"\r\n            name=\"button\">Search\r\n    </button>\r\n  </div>\r\n  <br>\r\n\r\n  <div *ngIf=\"submittedSearch && !appointments.length && !errorMessage\"><h3>Loading...</h3></div>\r\n  <div *ngIf=\"errorMessage\"><h3>{{errorMessage}}</h3></div>\r\n\r\n  <table *ngIf=\"submittedSearch && appointments.length\">\r\n    <tr>\r\n      <th>Date</th>\r\n      <th>Time</th>\r\n      <th>Description</th>\r\n      <th>Actions</th>\r\n    </tr>\r\n    <tr *ngFor=\"let appointment of appointments\">\r\n      <th>{{appointment.dateTime | date: 'mediumDate'}}</th>\r\n      <th>{{appointment.dateTime | date: 'shortTime'}}</th>\r\n      <th>{{appointment.description}}</th>\r\n      <th>\r\n        <span (click)=\"deleteAppointment(appointment._id)\" title=\"Delete\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\" class=\"action-icon\">\r\n            <path d=\"M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z\"/>\r\n          </svg>\r\n        </span>\r\n        <span title=\"Edit\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 576 512\" class=\"action-icon\">\r\n            <path d=\"M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z\"/>\r\n          </svg>\r\n        </span>\r\n      </th>\r\n    </tr>\r\n  </table>\r\n\r\n  <button (click)=\"toggleForm(true)\" type=\"button\" name=\"button\">New appointment</button>\r\n  <form *ngIf=\"createFormOpen\" class=\"\" action=\"index.html\" method=\"post\">\r\n    <label for=\"\">Date</label>\r\n    <input type=\"date\" name=\"date\" value=\"\" [(ngModel)]=\"formData.date\" required>\r\n    <br>\r\n    <label for=\"\">Time</label>\r\n    <input type=\"time\" name=\"time\" value=\"\" [(ngModel)]=\"formData.time\" required>\r\n    <br>\r\n    <label for=\"\">Description</label>\r\n    <input type=\"text\" name=\"description\" value=\"\" [(ngModel)]=\"formData.description\" required>\r\n    <br>\r\n    <button (click)=\"createAppointment(formData)\" type=\"button\" name=\"button\">Create</button>\r\n    <button (click)=\"cancelCreate(formData)\" type=\"button\" name=\"button\">Cancel</button>\r\n  </form>\r\n</div>\r\n\r\n<div style=\"position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;\">\r\n  <p>View this project's source code <a href=\"https://github.com/torihedden/apptBack\" target=\"_blank\">here</a> and <a href=\"https://github.com/torihedden/appointment-app\" target=\"_blank\">here</a>.</p>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -90,6 +90,7 @@ var AppComponent = /** @class */ (function () {
         this.http.get("https://guarded-refuge-12450.herokuapp.com/appointments/search/" + this.searchParam)
             .subscribe(function (data) {
             if (data[0]) {
+                console.log(data);
                 _this.appointments = data;
                 _this.errorMessage = null;
             }
@@ -119,6 +120,9 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.cancelCreate = function (formData) {
         this.clearFormData(formData);
         this.toggleForm(false);
+    };
+    AppComponent.prototype.deleteAppointment = function (appointment) {
+        console.log(appointment);
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

@@ -30,6 +30,7 @@ export class AppComponent {
     this.http.get(`https://guarded-refuge-12450.herokuapp.com/appointments/search/${this.searchParam}`)
       .subscribe(data => {
         if (data[0]) {
+          console.log(data);
           this.appointments = data;
           this.errorMessage = null;
         } else {
@@ -62,6 +63,10 @@ export class AppComponent {
   public cancelCreate(formData) {
     this.clearFormData(formData);
     this.toggleForm(false);
+  }
+
+  public deleteAppointment(appointment) {
+    console.log(appointment);
   }
 
 }
