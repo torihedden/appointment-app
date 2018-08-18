@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title            = 'Appointment App';
   searchParam      = '';
@@ -20,8 +21,7 @@ export class AppComponent {
     description : ''
   }
 
-
-  constructor(private http: HttpClient) {
+  constructor (private http: HttpClient) {
   }
 
   public onSearch(searchParam) {

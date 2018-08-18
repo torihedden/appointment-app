@@ -1,3 +1,11 @@
+* {
+  font-family: sans-serif;
+}
+
+td {
+  padding: 3px;
+}
+
 .action-icon {
   fill: lightgray;
   width: 15px;
